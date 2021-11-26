@@ -82,23 +82,3 @@
 .vert-offset-bottom-0{
     margin-bottom: 0em;
 }
-
-.input-textarea {
-  resize:none;
-  min-width:400px;
-  min-height:600px;
-}
-
-.output-textarea {
-  .clearfix();
-
-  outline: none;
-  resize:none;
-  min-width:600px;
-  border: none;
-  background-color: white;
-}
-
-.output-textarea[readonly] {
-   background-color: white;
-}
