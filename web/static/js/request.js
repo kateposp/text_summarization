@@ -1,7 +1,7 @@
 var BASE_URL = "http://localhost:5000"
 
 function summarize() {
-fetch("summarize",
+fetch("/summarize",
 {
     headers: {
       'Accept': 'application/json',
