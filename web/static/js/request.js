@@ -1,7 +1,7 @@
 var BASE_URL = "http://localhost:5000"
 
 function summarize() {
-fetch(BASE_URL + "/summarize",
+fetch("summarize",
 {
     headers: {
       'Accept': 'application/json',
@@ -11,8 +11,10 @@ fetch(BASE_URL + "/summarize",
     body: JSON.stringify({
         "text" : document.getElementById("input-textarea").value}
     )
-}).then(response => response.json())
-  .then(function(response_data) {
+}).then(function(response) {
+    return response.json();
+
+}).then(function(response_data) {
     console.log("Json", response_data);
     document.getElementById("output-textarea").value = response_data.text
 

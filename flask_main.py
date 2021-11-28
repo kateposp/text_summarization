@@ -29,7 +29,7 @@ def home():
 def login():
     print("I am exist", file=sys.stderr)
     if request.method == "POST":
-        data = request.get_json(force=True)
+        data = request.get_json()
         text_manager.set_text(data["text"])
 
         result = {
