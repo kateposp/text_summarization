@@ -3,19 +3,17 @@ import typing as tp
 
 import flask
 from flask import render_template, request
-from flask_cors import CORS
+
 
 from text_manager import TextManager
-
 
 PORT: int = 5000
 BASE_URL: str = "http://localhost:"
 
 app = flask.Flask(__name__,
-                  static_url_path='',
                   static_folder='web/static',
                   template_folder='web/templates')
-CORS(app)
+
 
 text_manager: tp.Optional[TextManager] = TextManager()
 
