@@ -1,6 +1,8 @@
 var BASE_URL = "http://localhost:5000"
 
 function summarize() {
+document.getElementById("output-textarea").value = ""
+
 fetch("/summarize",
 {
     headers: {

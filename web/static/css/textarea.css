@@ -10,6 +10,7 @@
   outline: none;
   resize:none;
   min-width:600px;
+  min-height:600px;
   border: none;
   background-color: white;
 }
