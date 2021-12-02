@@ -1,4 +1,5 @@
 import flask
+from werkzeug import exceptions
 from flask import render_template, request
 
 from text_manager import TextManager
@@ -11,6 +12,14 @@ app = flask.Flask(__name__,
                   template_folder='web/templates')
 
 text_manager: TextManager = TextManager()
+
+
+@app.errorhandler(exceptions.BadRequest)
+def handle_bad_request(error):
+    response = {
+        "error": "The text is too long..."
+    }
+    return response, 400
 
 
 @app.route('/')

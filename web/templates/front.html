@@ -63,7 +63,13 @@
 
             <div class="col-md-6 ">
                 <p><textarea class="form-control input-textarea" id="input-textarea"></textarea></p>
-                <button type="button" class="btn btn-default" onclick="summarize()">Send text</button>
+                <div class="form-group">
+                    <button type="button" class="btn btn-default" onclick="summarize()" id="send_button">Send text
+                    </button>
+                    <label for="send_button" style="padding-left:15px;" class="small text-danger"
+                           id="error-message"></label>
+                </div>
+
             </div>
 
             <div class="col-md-6">

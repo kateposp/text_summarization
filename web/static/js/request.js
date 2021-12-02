@@ -1,7 +1,9 @@
 var BASE_URL = "http://localhost:5000"
+var FAILED_ERROR = "ERROR!!! Text is too long..."
 
 function summarize() {
 document.getElementById("output-textarea").value = ""
+document.getElementById("error-message").innerHTML = ""
 
 fetch("/summarize",
 {
@@ -14,6 +16,10 @@ fetch("/summarize",
         "text" : document.getElementById("input-textarea").value}
     )
 }).then(function(response) {
+    if (response.status == 400) {
+        document.getElementById("error-message").innerHTML = FAILED_ERROR
+        throw response.json()
+    }
     return response.json();
 
 }).then(function(response_data) {

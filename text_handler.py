@@ -1,3 +1,6 @@
+import sys
+
+from werkzeug import exceptions
 import typing as tp
 import nlpcloud
 
@@ -7,17 +10,18 @@ class Summarizer:
     def __init__(self) -> None:
         self.token = "4a1831cef3e573f1e56b820209c0f149feacc325"
         self.model_name = "bart-large-cnn"
-        self.part_size = 800
+        self.part_size = 750
         self.client = nlpcloud.Client(self.model_name, self.token)
 
     def summarize(self, text: str) -> str:
         paragraphs = self._split_text(text)
         answer = ""
+        if len(paragraphs) > 3:
+            raise exceptions.BadRequest("The text is too long")
 
         for paragraph in paragraphs:
             result = self.client.summarization(paragraph)
             answer += result["summary_text"]
-        print(answer)
         return answer
 
     def _split_text(self, text: str) -> tp.List[str]:
