@@ -1,9 +1,10 @@
 var BASE_URL = "http://localhost:5000"
-var FAILED_ERROR = "ERROR!!! Text is too long..."
+var BAD_REQUEST = "Sorry, text is too long...";
+var SERVER_ERROR = "ERROR!!! Something went wrong. Please try again after some minutes"
 
 function summarize() {
-document.getElementById("output-textarea").value = ""
-document.getElementById("error-message").innerHTML = ""
+document.getElementById("output-textarea").value = "";
+document.getElementsByClassName("spinner-border")[0].style.visibility = "visible";
 
 fetch("/summarize",
 {
@@ -17,7 +18,11 @@ fetch("/summarize",
     )
 }).then(function(response) {
     if (response.status == 400) {
-        document.getElementById("error-message").innerHTML = FAILED_ERROR
+        document.getElementById("output-textarea").value = BAD_REQUEST
+        throw response.json()
+    }
+    if (response.status == 500) {
+        document.getElementById("output-textarea").value = SERVER_ERROR
         throw response.json()
     }
     return response.json();
@@ -25,11 +30,16 @@ fetch("/summarize",
 }).then(function(response_data) {
     console.log("Json", response_data);
     document.getElementById("output-textarea").value = response_data.text
+    document.getElementsByClassName("spinner-border")[0].style.visibility = "hidden";
+
 
 }).catch(function(error) {
     console.log('Request failed', error);
+    document.getElementsByClassName("spinner-border")[0].style.visibility = "hidden";
+
 });
 
 }
+
 
 
