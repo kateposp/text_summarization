@@ -1,10 +1,12 @@
+from text_handler import Summarizer
+
 import typing as tp
 
 
 class TextManager:
-
-    def __init__(self):
+    def __init__(self) -> None:
         self.text: tp.Optional[str] = None
+        self.summarizer = Summarizer()
 
     def set_text(self, text: str) -> None:
         self.text = text
@@ -13,5 +15,5 @@ class TextManager:
         if self.text is None:
             raise RuntimeError("There is no value")
         else:
-            end = min(21, len(self.text))
-            return self.text[:end]
+            answer = self.summarizer.summarize(self.text)
+            return answer

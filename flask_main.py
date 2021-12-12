@@ -1,9 +1,6 @@
-import sys
-import typing as tp
-
 import flask
+from werkzeug import exceptions
 from flask import render_template, request
-
 
 from text_manager import TextManager
 
@@ -14,8 +11,15 @@ app = flask.Flask(__name__,
                   static_folder='web/static',
                   template_folder='web/templates')
 
+text_manager: TextManager = TextManager()
 
-text_manager: tp.Optional[TextManager] = TextManager()
+
+@app.errorhandler(exceptions.BadRequest)
+def handle_bad_request(error):
+    response = {
+        "error": "The text is too long..."
+    }
+    return response, 400
 
 
 @app.route('/')
@@ -25,15 +29,12 @@ def home():
 
 @app.route('/summarize', methods=['POST'])
 def login():
-    print("I am exist", file=sys.stderr)
-    if request.method == "POST":
-        data = request.get_json()
-        text_manager.set_text(data["text"])
-
-        result = {
-            "text": text_manager.get_summarized_text()
-        }
-        return result, 200
+    data = request.get_json()
+    text_manager.set_text(data["text"])
+    result = {
+        "text": text_manager.get_summarized_text()
+    }
+    return result, 200
 
 
 if __name__ == '__main__':

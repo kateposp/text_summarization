@@ -25,25 +25,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
     <link rel="canonical" href="https://getbootstrap.com/docs/3.4/examples/signin/">
 
     <title>Project</title>
 
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-
     <!--    Not Flask-->
     <link rel="stylesheet" type="text/css" href="../static/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/spinner.css">
     <link rel="stylesheet" type="text/css" href="../static/css/textarea.css">
     <link rel="stylesheet" type="text/css" href="../static/css/header.css">
     <script type="text/javascript" src="../static/js/request.js"></script>
 
-
-    <!--    <link rel="stylesheet" type="text/css" href="../static/css/styles.css">-->
-    <!--    <link rel="stylesheet" type="text/css" href="../static/css/header.css">-->
-    <!--    <script type="text/javascript" src="../static/js/request.js"></script>-->
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -63,7 +55,14 @@
 
             <div class="col-md-6 ">
                 <p><textarea class="form-control input-textarea" id="input-textarea"></textarea></p>
-                <button type="button" class="btn btn-default" onclick="summarize()">Send text</button>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-default" onclick="summarize()" id="send-button">Send text
+                    </button>
+                    <div class="spinner-border text-primary" role="status" id="load-spinner">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+
             </div>
 
             <div class="col-md-6">

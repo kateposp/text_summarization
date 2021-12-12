@@ -1,6 +1,5 @@
-.size(@width; @height) {
-  width: @width;
-  height: @height;
+body {
+  padding-top: 10px;
 }
 
 .vert-offset-top-1{
